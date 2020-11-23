@@ -327,7 +327,7 @@ func (q *Query) buildFields() string {
 	fields := make([]string, len(q.fields))
 
 	for i := range fields {
-		splitByAs := strings.Split(q.fields[i], "AS")
+		splitByAs := strings.Split(q.fields[i], " AS ")
 		selectField := strings.TrimSpace(splitByAs[0])
 		selectAs := ""
 
@@ -341,8 +341,8 @@ func (q *Query) buildFields() string {
 
 		if functionMatcher.MatchString(selectField) {
 			fields[i] = selectField
-        } else if mathMatcher.MatchString(selectField) {
-            fields[i] = selectField
+		} else if mathMatcher.MatchString(selectField) {
+			fields[i] = selectField
 		} else {
 			fields[i] = fmt.Sprintf("\"%s\"", selectField)
 		}

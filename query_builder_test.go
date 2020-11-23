@@ -44,6 +44,15 @@ func TestSelectAs(t *testing.T) {
 		Build()
 
 	assert(t, q, expected)
+
+	expected = `SELECT "XTC_AS_UTRA","humidity" AS "hum" FROM "measurement"`
+	builder = New()
+	q = builder.
+		Select("XTC_AS_UTRA", "humidity AS hum").
+		From("measurement").
+		Build()
+
+	assert(t, q, expected)
 }
 
 func TestSelectAll(t *testing.T) {
